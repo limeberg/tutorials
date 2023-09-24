@@ -4,5 +4,6 @@ namespace: o11y
 resources:
   - cluster-role-binding.yml
   - cluster-role.yml
+  - pod-monitor.yml
   - prometheus.yml
   - service-account.yml

@@ -8,8 +8,10 @@ kubectl apply -k .
 # download prometheus-operator bundle. change version if necessary
 curl -o ./prometheus-operator/bundle.yml https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/v0.68.0/bundle.yaml
 
-# deploy prometheus-operator crds and deployment
-kubectl create -k prometheus-operator
+# deploy prometheus-operator crds and deployment.
+# use flag '--server-side' to avoid warning about too long
+# annotation names
+kubectl apply --server-side -k prometheus-operator
 
 # deploy prometheus 
 kubectl apply -k prometheus

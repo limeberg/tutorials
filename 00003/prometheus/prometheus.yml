@@ -3,7 +3,6 @@ apiVersion: monitoring.coreos.com/v1
 kind: Prometheus
 metadata:
   name: production
-  namespace: monitoring
 spec:
   version: v2.43.1
   serviceAccountName: prometheus
@@ -35,17 +34,5 @@ spec:
     fsGroup: 0
     runAsNonRoot: false
     runAsUser: 0
-  storage:
-    # volumeClaimTemplate:
-    #   spec:
-    #     resources:
-    #       requests:
-    #         storage: 20Gi
-  remoteWrite:
-    - url: http://receiver-write-1.monitoring.svc.cluster.local:10908/api/v1/receive
-      queueConfig:
-        maxSamplesPerSend: 1000
-        maxShards: 200
-        capacity: 2500
   containers:
     - name: prometheus
