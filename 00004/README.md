@@ -20,18 +20,24 @@ kubectl -n gatekeeper-system get pods
 # go ahead and list the CRDs that were just deployed as well
 kubectl get crd -l=gatekeeper.sh/system=yes
 
-# create namespace for nginx
+# create the constraints templates
+kubectl apply -k constraints/templates
+
+# create the constraints
+kubectl apply -f constraints
+
+# create namespace 'dev' for nginx
 kubectl apply -f namespace.yml
 
 # go ahead and deploy nginx-not-valid-image-tag
 kubectl apply -k nginx-not-valid-image-tag
 
-# go ahead and deploy nginx-not-valid-labels
+# go ahead and deploy nginx-not-valid-labels. this will fail.
 kubectl apply -k nginx-not-valid-labels
 
-# go ahead and deploy nginx-valid
+# go ahead and deploy nginx-valid. this will fail.
 kubectl apply -k nginx-valid
-```
 
-### Resources
-- https://open-policy-agent.github.io/gatekeeper-library/website/validation/allowedrepos
+# for more examples of different policies go to:
+# https://open-policy-agent.github.io/gatekeeper-library/website/validation/allowedrepos
+```

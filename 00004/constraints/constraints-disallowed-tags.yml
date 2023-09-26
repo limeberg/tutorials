@@ -5,9 +5,10 @@ metadata:
   name: disallowed-tags
 spec:
   match:
-    namespaces: ["stg"]
+    namespaces: ["dev"]
     kinds:
       - apiGroups: [""]
-        kinds: ["Pod"]
+        kinds: 
+        - Pod
   parameters:
     tags: ["latest"]

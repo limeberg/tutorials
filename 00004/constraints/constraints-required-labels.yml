@@ -5,17 +5,17 @@ metadata:
   name: required-labels
 spec:
   match:
-    namespaces: ["stg"]
+    namespaces: ["dev"]
     kinds:
       - apiGroups: [""]
         kinds:
-        - ConfigMaps
-        - Pods
-        - Secrets
+        - ConfigMap
+        - Pod
+        - Secret
       - apiGroups: ["apps"]
         kinds:
-        - Deployments
-        - ReplicaSets
+        - Deployment
+        - ReplicaSet
   parameters:
     labels:
       - key: app.kubernetes.io/name
