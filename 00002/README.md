@@ -1,6 +1,9 @@
 Sign and Verify Containers With Ease
 ===
 
+- [Blog](https://www.limeberg.com/blog/verify-container-signatures-without-admission-controller/) 📖
+<!-- - [Youtube 📹](#) -->
+
 ```sh
 
 # add signature policy

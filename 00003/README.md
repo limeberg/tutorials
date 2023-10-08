@@ -1,6 +1,9 @@
 Effortless Deployment of Prometheus-Operator in Just a Few Steps!
 ===
 
+- [Blog](https://www.limeberg.com/blog/effortless-deployment-of-prometheus-operator-in-just-a-few-steps/) 📖
+<!-- - [Youtube 📹](#) -->
+
 ```sh
 # create namespace
 kubectl apply -k .

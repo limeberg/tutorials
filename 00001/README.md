@@ -1,6 +1,9 @@
 Sign and Verify Containers With Ease
 ===
 
+- [Blog](https://www.limeberg.com/blog/sign-and-verify-containers-with-ease/) 📖
+<!-- - [Youtube 📹](#) -->
+
 ```sh
 # build the container.
 docker build -t <registry-name>/<repo-name>:<tag> .
