@@ -14,7 +14,9 @@ kubectl apply -k gatekeeper
 # list namespaces and you should see 'gatekeeper-system' in the list
 kubectl get ns
 
-# in the gatekeeper-system namespace you should see 4 running pods. the audit pod might have a couple of restarts due to the CRDs not being available initially.
+# in the gatekeeper-system namespace you should see 4 running pods.
+# the audit pod might have a couple of restarts due to the
+# CRDs not being available initially.
 kubectl -n gatekeeper-system get pods
 
 # go ahead and list the CRDs that were just deployed as well
@@ -31,7 +33,6 @@ kubectl apply -f nginx
 
 # you will see errors
 # 'validation.gatekeeper.sh" denied the request: [disallowed-tags] container <nginx> uses a disallowed tag <nginx:latest>; disallowed tags are ["latest"]'
-# and
 # 'validation.gatekeeper.sh" denied the request: [required-labels] you must provide labels: {"app.kubernetes.io/name"}'
 
 # for more examples of different policies go to:
