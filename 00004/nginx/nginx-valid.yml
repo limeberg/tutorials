@@ -3,9 +3,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-valid
+  labels:
+    app.kubernetes.io/name: nginx-valid
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nginx-valid
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nginx-valid
     spec:
       containers:
       - name: nginx

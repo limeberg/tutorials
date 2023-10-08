@@ -10,5 +10,10 @@ spec:
       - apiGroups: [""]
         kinds: 
         - Pod
+      - apiGroups: ["apps"]
+        kinds:
+        - StatefulSet
+        - Deployment
+        - ReplicaSet
   parameters:
     tags: ["latest"]

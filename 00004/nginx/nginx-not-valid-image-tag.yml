@@ -3,9 +3,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-not-valid-image-tag
+  labels:
+    app.kubernetes.io/name: nginx-not-valid-image-tag
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: nginx-not-valid-image-tag
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: nginx-not-valid-image-tag
     spec:
       containers:
       - name: nginx

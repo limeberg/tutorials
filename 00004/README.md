@@ -1,4 +1,4 @@
-Gatekeeper Policy Agent
+Secure Your Cluster With Gatekeeper Policy Agent
 ===
 
 ```bash
@@ -26,17 +26,13 @@ kubectl apply -k constraints/templates
 # create the constraints
 kubectl apply -f constraints
 
-# create namespace 'dev' for nginx
-kubectl apply -f namespace.yml
+# create nginx apps in namespace 'dev'
+kubectl apply -f nginx
 
-# go ahead and deploy nginx-not-valid-image-tag
-kubectl apply -k nginx-not-valid-image-tag
-
-# go ahead and deploy nginx-not-valid-labels. this will fail.
-kubectl apply -k nginx-not-valid-labels
-
-# go ahead and deploy nginx-valid. this will fail.
-kubectl apply -k nginx-valid
+# you will see errors
+# 'validation.gatekeeper.sh" denied the request: [disallowed-tags] container <nginx> uses a disallowed tag <nginx:latest>; disallowed tags are ["latest"]'
+# and
+# 'validation.gatekeeper.sh" denied the request: [required-labels] you must provide labels: {"app.kubernetes.io/name"}'
 
 # for more examples of different policies go to:
 # https://open-policy-agent.github.io/gatekeeper-library/website/validation/allowedrepos

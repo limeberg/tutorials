@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: dev
+resources:
+  - nginx-not-valid-image-tag.yml
+  - nginx-not-valid-labels.yml
+  - nginx-valid.yml
+  - namespace.yml
