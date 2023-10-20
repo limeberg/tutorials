@@ -4,6 +4,7 @@ kind: K8sRequiredLabels
 metadata:
   name: required-labels
 spec:
+  # enforcementAction: warn
   match:
     namespaces: ["dev"]
     kinds:

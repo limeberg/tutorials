@@ -41,48 +41,51 @@ spec:
         package k8sdisallowedtags
 
         violation[{"msg": msg}] {
-            container := input_containers[_]
-            not is_exempt(container)
-            tags := [forbid | tag = input.parameters.tags[_] ; forbid = endswith(container.image, concat(":", ["", tag]))]
-            any(tags)
-            msg := sprintf("container <%v> uses a disallowed tag <%v>; disallowed tags are %v", [container.name, container.image, input.parameters.tags])
+          container := input_containers[_]
+          not is_exempt(container)
+          tags := [forbid | tag = input.parameters.tags[_] ; forbid = endswith(container.image, concat(":", ["", tag]))]
+          any(tags)
+          msg := sprintf("%v (%v.%v) uses a disallowed tag <%v>", [input.review.object.kind, input.review.object.metadata.namespace, input.review.object.metadata.name, container.image])
         }
 
         violation[{"msg": msg}] {
-            container := input_containers[_]
-            not is_exempt(container)
-            tag := [contains(container.image, ":")]
-            not all(tag)
-            msg := sprintf("container <%v> didn't specify an image tag <%v>", [container.name, container.image])
+          container := input_containers[_]
+          not is_exempt(container)
+          tag := [contains(container.image, ":")]
+          not all(tag)
+          msg := sprintf("%v (%v.%v) didn't specify an image tag <%v>", [input.review.object.kind, input.review.object.metadata.namespace, input.review.object.metadata.name, container.image])
         }
 
         input_containers[c] {
-            c := input.review.object.spec.containers[_]
+          c := input.review.object.spec.containers[_]
         }
+
         input_containers[c] {
-            c := input.review.object.spec.initContainers[_]
+          c := input.review.object.spec.initContainers[_]
         }
+
         input_containers[c] {
-            c := input.review.object.spec.ephemeralContainers[_]
+          c := input.review.object.spec.ephemeralContainers[_]
         }
+
         input_containers[c] {
-            c := input.review.object.spec.template.spec.containers[_]
+          c := input.review.object.spec.template.spec.containers[_]
         }
 
         is_exempt(container) {
-            exempt_images := object.get(object.get(input, "parameters", {}), "exemptImages", [])
-            img := container.image
-            exemption := exempt_images[_]
-            _matches_exemption(img, exemption)
+          exempt_images := object.get(object.get(input, "parameters", {}), "exemptImages", [])
+          img := container.image
+          exemption := exempt_images[_]
+          _matches_exemption(img, exemption)
         }
 
         _matches_exemption(img, exemption) {
-            not endswith(exemption, "*")
-            exemption == img
+          not endswith(exemption, "*")
+          exemption == img
         }
 
         _matches_exemption(img, exemption) {
-            endswith(exemption, "*")
-            prefix := trim_suffix(exemption, "*")
-            startswith(img, prefix)
+          endswith(exemption, "*")
+          prefix := trim_suffix(exemption, "*")
+          startswith(img, prefix)
         }

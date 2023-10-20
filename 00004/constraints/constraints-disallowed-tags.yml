@@ -4,6 +4,7 @@ kind: K8sDisallowedTags
 metadata:
   name: disallowed-tags
 spec:
+  # enforcementAction: warn
   match:
     namespaces: ["dev"]
     kinds:
